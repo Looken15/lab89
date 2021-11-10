@@ -1,0 +1,30 @@
+E:\1labs\graphics_9\Lighting\Lighting\bin\Debug\Lighting.exe.config
+E:\1labs\graphics_9\Lighting\Lighting\bin\Debug\Lighting.exe
+E:\1labs\graphics_9\Lighting\Lighting\bin\Debug\Lighting.pdb
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.csprojAssemblyReference.cache
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.Form1.resources
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.Properties.Resources.resources
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.csproj.GenerateResource.cache
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.csproj.CoreCompileInputs.cache
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.exe
+E:\1labs\graphics_9\Lighting\Lighting\obj\Debug\Lighting.pdb
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\bin\Debug\Lighting.exe.config
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\bin\Debug\Lighting.exe
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\bin\Debug\Lighting.pdb
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.csprojAssemblyReference.cache
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.Form1.resources
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.Properties.Resources.resources
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.csproj.GenerateResource.cache
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.csproj.CoreCompileInputs.cache
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.exe
+C:\Users\Владимир Садовский\Desktop\Lighting\Lighting\obj\Debug\Lighting.pdb
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\bin\Debug\Lighting.exe.config
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\bin\Debug\Lighting.exe
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\bin\Debug\Lighting.pdb
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.csprojAssemblyReference.cache
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.Form1.resources
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.Properties.Resources.resources
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.csproj.GenerateResource.cache
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.csproj.CoreCompileInputs.cache
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.exe
+C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.pdb
