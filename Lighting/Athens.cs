@@ -30,7 +30,6 @@ namespace Lighting
         public static double[,] lastMatrix;
         public static void ResetAthene()
         {
-            //rotateAxis = 'x';
             scaleFactorX = 1;
             scaleFactorY = 1;
             scaleFactorZ = 1;
@@ -43,8 +42,6 @@ namespace Lighting
             MoveMatrix = AtheneMove(0, 0, 0);
             RotateMatrix = AtheneRotate(0, 'x');
             ScaleMatrix = AtheneScale(1, 1, 1);
-            //firstMatrix = AtheneMove((int)(-zeroPoint.X), (int)(-zeroPoint.Y), (int)(-zeroPoint.Z));
-            //lastMatrix = AtheneMove((int)zeroPoint.X, (int)zeroPoint.Y, (int)zeroPoint.Z);
             firstMatrix = AtheneMove(0, 0, 0);
             lastMatrix = AtheneMove(0, 0, 0);
         }

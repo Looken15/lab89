@@ -232,12 +232,11 @@ namespace Lighting
         public static string LoadMesh(ref Mesh mesh)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-
             openFileDialog1.Filter = "obj files (*.obj)|*.obj";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.RestoreDirectory = true;
-            string ans = "object";
+            openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+            string ans = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

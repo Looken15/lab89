@@ -28,3 +28,13 @@ C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighti
 C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.csproj.CoreCompileInputs.cache
 C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.exe
 C:\Users\Tema-\Desktop\Учеба\Компьютерная графика\Lighting\Lighting\obj\Debug\Lighting.pdb
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Debug\Lighting.exe.config
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Debug\Lighting.exe
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Debug\Lighting.pdb
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.csproj.AssemblyReference.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.Form1.resources
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.Properties.Resources.resources
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.csproj.GenerateResource.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.csproj.CoreCompileInputs.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.exe
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Debug\Lighting.pdb

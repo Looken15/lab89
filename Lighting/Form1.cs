@@ -22,7 +22,6 @@ namespace Lighting
         bool mDown;
         Point curP;
         ActType at;
-        //double MeshStartScale = 40;
 
 
         public Form1()
@@ -41,7 +40,6 @@ namespace Lighting
             cameraPoint = new Point3D(0, 0, 500, 0);
             cameraLength = 200;
             Light = new Point3D(0, -1000, 0);
-            //showWireframe = false;
             at = ActType.Move;
             ResetAthene();
             DrawScene(pic, texture, pictureBox1);
@@ -82,9 +80,6 @@ namespace Lighting
         {
             mDown = true;
             curP = e.Location;
-            //firstMatrix = AtheneMove(-(int)zeroPoint.X, -(int)zeroPoint.Y, -(int)zeroPoint.Z);
-            //lastMatrix = AtheneMove((int)zeroPoint.X, (int)zeroPoint.Y, (int)zeroPoint.Z);
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -188,7 +183,6 @@ namespace Lighting
 
                     ScaleMatrix = AtheneScale(scaleFactorX, scaleFactorY, scaleFactorZ);
                     double[,] matr = MatrixMult(MatrixMult(firstMatrix, ScaleMatrix), lastMatrix);
-                    //mesh[curMeshInd] = new Mesh(meshOrig[curMeshInd]);
                     Mesh newMesh = new Mesh(meshOrig[curMeshInd]);
                     AtheneTransform(ref newMesh, matr);
                     mesh[curMeshInd] = new Mesh(newMesh);
@@ -211,6 +205,8 @@ namespace Lighting
         {
             Mesh newMesh = new Mesh();
             string name = LoadMesh(ref newMesh);
+            if (name == "")
+                return;
             if (comboBox1.Items.Contains(name))
             {
                 int counter = 1;
@@ -230,6 +226,8 @@ namespace Lighting
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            if (mesh.Count == 0)
+                return;
             mesh.Remove(mesh[comboBox1.SelectedIndex]);
             comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
             comboBox1.Text = "";

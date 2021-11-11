@@ -1,0 +1,10 @@
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Release\Lighting.exe.config
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Release\Lighting.exe
+C:\Users\barakuda\Source\Repos\lab89\Lighting\bin\Release\Lighting.pdb
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.csproj.AssemblyReference.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.Form1.resources
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.Properties.Resources.resources
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.csproj.GenerateResource.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.csproj.CoreCompileInputs.cache
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.exe
+C:\Users\barakuda\Source\Repos\lab89\Lighting\obj\Release\Lighting.pdb
