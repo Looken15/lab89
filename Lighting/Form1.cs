@@ -22,6 +22,7 @@ namespace Lighting
         bool mDown;
         Point curP;
         ActType at;
+        Point prev_pos;
 
 
         public Form1()
@@ -84,7 +85,12 @@ namespace Lighting
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!mDown) return;
+            if (!mDown)
+            {
+                if (checkBox6.Checked)
+                    pictureBox1_Move(e as MouseEventArgs);
+                return;
+            }
             if (mesh.Count == 0) return;
             if (at == ActType.Move)
             {
@@ -320,6 +326,33 @@ namespace Lighting
                 texture = new Bitmap(Image.FromFile(path));
                 checkBox1.Enabled = true;
             }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox1_Move(EventArgs e)
+        {
+            var me = e as MouseEventArgs;
+            if (checkBox6.Checked)
+            {
+                var step_x = me.Location.X - prev_pos.X;
+                var step_y = me.Location.Y - prev_pos.Y;
+                double angle_x = Math.Atan(step_x / cameraPoint.Z);
+                double angle_y = Math.Atan(step_y / cameraPoint.Z);
+                var camera_matr = MatrixMult(MatrixMult(AtheneMove(step_x, 0, 0), AtheneMove(0, step_y, 0)),
+                    MatrixMult(AtheneRotate(angle_x, 'x'), AtheneRotate(angle_y, 'y')));
+                
+                for (int i = 0; i < mesh.Count; ++i)
+                {
+                    var z = mesh[i];
+                    AtheneTransform(ref z, camera_matr);
+                    mesh[i] = z;
+                }
+                DrawScene(pic, texture, pictureBox1);
+            }
+            prev_pos = me.Location;
         }
     }
 }

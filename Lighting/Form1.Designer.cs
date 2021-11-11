@@ -255,6 +255,7 @@
             this.checkBox6.TabIndex = 19;
             this.checkBox6.Text = "Camera rotate with mouse";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // Form1
             // 
