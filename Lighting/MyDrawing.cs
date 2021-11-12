@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Drawing;
 using static Lighting.MyGeometry;
 using static Lighting.Athens;
+using static Lighting.FastBitmap;
 
 namespace Lighting
 {
@@ -30,13 +31,10 @@ namespace Lighting
         {
             Graphics g = Graphics.FromImage(bm);
             g.Clear(Color.Transparent);
-
-            Color col = Color.Orange;
-            Pen pen = new Pen(col, penWidth);
-
             double[,] Zbuf = new double[bm.Width, bm.Height];
             Color[,] Cbuf = new Color[bm.Width, bm.Height];
             double[,] Darkness = new double[bm.Width, bm.Height];
+            //init
             for (int i = 0; i < bm.Width; i++)
             {
                 for (int j = 0; j < bm.Height; j++)
@@ -48,8 +46,10 @@ namespace Lighting
             }
             double zMax = 0;
             double zMin = int.MaxValue;
+
             foreach (Mesh msh in mesh)
             {
+                //все нормали фигуры
                 List<Point3D> vNorms = VertexNormals(msh, false);
 
                 foreach (Polygon pol in msh.faces)
@@ -60,58 +60,54 @@ namespace Lighting
                         curVNorms.Add(vNorms.Where((x) => x.index == tp.index).First());
                     }
 
+                    Color curColor;
+                    {
+                        Point3D normal = CreateNormal(pol, false);
+
+                        if (flatColor)
+                        {
+                            int angle = (int)(AngleBetween(normal, Light, true) * 127 / Math.PI);
+                            curColor = Color.FromArgb(angle, angle, angle);
+                        }
+                        else
+                            curColor = Color.GreenYellow;
+
+                        //отсечение невидимых граней
+                        if (AngleBetween(new Point3D(0, 0, 1), normal, false) <= 90)
+                            continue;
+                    }
+
+
                     List<Edge> listEd = new List<Edge>();
-                    int counter = 0;
                     int maxInd = 0;
                     int maxIndP = 0;
                     double maxY = int.MinValue;
-
                     double minY = int.MaxValue;
                     int minInd = 0;
                     int minIndP = 0;
-
-                    Point3D normal = CreateNormal(pol, false);
-                    Color curColor;
-
-                    if (flatColor)
-                    {
-                        int kek = (int)(AngleBetween(normal, Light, true) * 127 / Math.PI);
-                        curColor = Color.FromArgb(kek, kek, kek);
-                    }
-                    else
-                        curColor = Color.GreenYellow;
-
-                    if (AngleBetween(new Point3D(0, 0, 1), normal, false) <= 90)
-                        continue;
-                    //
-                    //pol.points[0].UV = new Point(0, 0);
-                    //pol.points[1].UV = new Point(0, 1);
-                    //pol.points[2].UV = new Point(1, 0);
-                    //pol.points[3].UV = new Point(1, 1);
-                    //
-
                     for (int i = 0; i < pol.points.Count(); i++)
                     {
                         Point3D screenp1 = pol.points[i];
                         if (screenp1.Y > maxY)
                         {
                             maxY = screenp1.Y;
-                            maxInd = counter;
+                            maxInd = i;
                             maxIndP = pol.points[i].index;
                         }
                         if (screenp1.Y < minY)
                         {
                             minY = screenp1.Y;
-                            minInd = counter;
+                            minInd = i;
                             minIndP = pol.points[i].index;
                         }
-                        counter++;
                         if (i > 0)
                         {
                             listEd.Add(new Edge(pol.points[i - 1], screenp1));
                         }
                     }
                     listEd.Add(new Edge(pol.points[pol.points.Count() - 1], pol.points[0]));
+
+                    int counter = pol.points.Count();
                     int lInd = (maxInd - 1 + counter) % counter;
                     int rInd = maxInd;
                     int iters = counter;
@@ -143,7 +139,6 @@ namespace Lighting
                     }
 
                     bool toggle = false;
-
                     bool tri = false;
 
                     if (pol.points.Count == 3)
@@ -155,7 +150,6 @@ namespace Lighting
                     bool r = true;
 
                     // Гуро
-
                     Point3D lcurNorm = curVNorms.Where((x) => x.index == maxIndP).First();
                     Point3D rcurNorm = lcurNorm;
                     Point3D lNorm = curVNorms.Where((x) => x.index == listEd[lInd].p1.index).First();
@@ -320,7 +314,7 @@ namespace Lighting
                                             Cbuf[t1, t2] = curColor;
                                         }
 
-                                        Darkness[t1, t2] = (curDark);
+                                        Darkness[t1, t2] = curDark;
 
                                         textureX += textureX_Step;
                                         textureY += textureY_Step;
@@ -330,7 +324,6 @@ namespace Lighting
                             }
 
                         }
-
                         if (lCurP.Y <= lEd.p1.Y)
                         {
                             lInd = (lInd - 1 + counter) % counter;
@@ -414,41 +407,65 @@ namespace Lighting
                         }
                     }
                 }
+
+                RefreshBitmap(bm, Cbuf, Darkness);
+            }
+            if (showWireframe)
+                DrawWireframe(g, mesh);
+
+            pb.Refresh();
+        }
+
+
+        
+
+        private static void DrawWireframe(Graphics g, List<Mesh> meshes)
+        {
+            Color col = Color.Orange;
+            Pen pen = new Pen(col, penWidth);
+            foreach (Mesh msh in mesh)
+                foreach (Polygon pol in msh.faces)
+                {
+                    for (int i = 0; i < pol.points.Count() - 1; i++)
+                    {
+                        Point screenp1 = ScreenPos(pol.points[i]);
+                        Point screenp2 = ScreenPos(pol.points[i + 1]);
+                        g.DrawLine(pen, screenp1, screenp2);
+                    }
+                    Point screenp11 = ScreenPos(pol.points[pol.points.Count() - 1]);
+                    Point screenp22 = ScreenPos(pol.points[0]);
+                    g.DrawLine(pen, screenp11, screenp22);
+                    continue;
+                }
+        }
+
+        /// <summary>
+        /// Обновление изображения битмапа через быстрый битмап
+        /// </summary>
+        /// <param name="bm"></param>
+        /// <param name="Cbuf"></param>
+        /// <param name="Darkness"></param>
+        private static void RefreshBitmap(Bitmap bm, Color[,] Cbuf, double[,] Darkness)
+        {
+            using (var fastBitmap = new FastBitmap(bm))
+            {
                 for (int i = 0; i < bm.Width; i++)
                     for (int j = 0; j < bm.Height; j++)
                     {
-                        Color coll;
+                        Color color;
                         if (flatColor)
                         {
-                            coll = Cbuf[i, j];
+                            color = Cbuf[i, j];
                         }
                         else
                         {
-                            coll = Color.FromArgb((int)(Cbuf[i, j].R * (1 - Darkness[i, j])),
+                            color = Color.FromArgb((int)(Cbuf[i, j].R * (1 - Darkness[i, j])),
                                                     (int)(Cbuf[i, j].G * (1 - Darkness[i, j])),
                                                     (int)(Cbuf[i, j].B * (1 - Darkness[i, j])));
                         }
-
-                        bm.SetPixel(i, j, coll);
+                        fastBitmap[i, j] = color;
                     }
             }
-            if (showWireframe)
-                foreach (Mesh msh in mesh)
-                    foreach (Polygon pol in msh.faces)
-                    {
-                        for (int i = 0; i < pol.points.Count() - 1; i++)
-                        {
-                            Point screenp1 = ScreenPos(pol.points[i]);
-                            Point screenp2 = ScreenPos(pol.points[i + 1]);
-                            g.DrawLine(pen, screenp1, screenp2);
-                        }
-                        Point screenp11 = ScreenPos(pol.points[pol.points.Count() - 1]);
-                        Point screenp22 = ScreenPos(pol.points[0]);
-                        g.DrawLine(pen, screenp11, screenp22);
-                        continue;
-                    }
-
-            pb.Refresh();
         }
 
         public static double DarknessByAngle(Point3D p1, Point3D p2)
